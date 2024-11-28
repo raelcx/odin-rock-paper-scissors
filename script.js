@@ -13,3 +13,9 @@ function getComputerChoice() {
 
     return generateRandomNumber;
 }
+
+function getHumanChoice() {
+    let choice = prompt("Choose between rock, paper or scissors! What is your choice?")
+    return choice;
+}
+
