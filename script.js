@@ -19,3 +19,34 @@ function getHumanChoice() {
     return choice;
 }
 
+function playRound(humanChoice, computerChoice) {
+    if (humanChoice == computerChoice) {
+        console.log("It's a tie!");
+        return;
+    }
+    
+    if (humanChoice == "rock" && computerChoice == "scissors") {
+        console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+        return;
+    } 
+
+    if (humanChoice == "paper" && computerChoice == "rock") {
+        console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+        return;
+    } 
+
+    if (humanChoice == "scissors" && computerChoice == "paper") {
+        console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+        return;
+    } 
+    
+    else {
+        console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
+        return;
+    }
+}
+
+
+
+let humanScore = 0;
+let computerScore = 0;
