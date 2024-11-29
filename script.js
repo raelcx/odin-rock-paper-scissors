@@ -15,7 +15,19 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    let choice = prompt("Choose between rock, paper or scissors! What is your choice?")
+
+
+    let keepRunning = true;
+    let choice;
+
+    while (keepRunning) {
+        choice = prompt("Choose between rock, paper or scissors! What is your choice?").toLowerCase();
+        if (choice != "rock" && choice != "scissors" && choice != "paper") {
+            alert("Choose only between ROCK, PAPER or SCISSORS!");
+        } else {
+            keepRunning = false;
+        }
+    }
     return choice;
 }
 
