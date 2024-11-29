@@ -63,14 +63,16 @@ function playGame() {
     let humanScore = 0;
     let computerScore = 0;
 
-    let result = playRound(getHumanChoice(), getComputerChoice());
+    
+    for (i = 0; i < 5; i++) {
+        let result = playRound(getHumanChoice(), getComputerChoice());
 
-    if (result == 0) {
-        humanScore += 1;
-    } else {
-        computerScore += 1;
+        if (result == 0) {
+            humanScore += 1;
+        } else {
+            computerScore += 1;
+        }
     }
-
 }
 
 
