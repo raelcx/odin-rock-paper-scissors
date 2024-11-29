@@ -34,7 +34,7 @@ function getHumanChoice() {
 function playRound(humanChoice, computerChoice) {
     if (humanChoice == computerChoice) {
         console.log("It's a tie!");
-        return 0;
+        return 2;
     }
     
     if (humanChoice == "rock" && computerChoice == "scissors") {
