@@ -4,11 +4,11 @@ function getComputerChoice() {
 
     switch(generateRandomNumber) {
         case(1): computerChoice = "rock";
-        break
+        break;
         case(2): computerChoice = "paper";
-        break
+        break;
         case(3): computerChoice = "scissors";
-        break
+        break;
     }
 
     return computerChoice;
@@ -31,29 +31,47 @@ function getHumanChoice() {
 
 function playRound(humanChoice, computerChoice) {
     if (humanChoice == computerChoice) {
-        console.log("It's a tie!");
-        return 2;
+        return showResult("tie", humanChoice, computerChoice);
     }
     
-    if (humanChoice == "rock" && computerChoice == "scissors") {
-        console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-        return 0;
+    if ((humanChoice == "rock" && computerChoice == "scissors")
+        || (humanChoice == "paper" && computerChoice == "rock")
+        || (humanChoice == "scissors" && computerChoice == "paper")) {
+        return showResult("win", humanChoice, computerChoice);
     } 
-
-    if (humanChoice == "paper" && computerChoice == "rock") {
-        console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-        return 0;
-    } 
-
-    if (humanChoice == "scissors" && computerChoice == "paper") {
-        console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-        return 0;
-    } 
-    
     else {
-        console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
-        return 1;
+        return showResult("lose", humanChoice, computerChoice);
     }
+}
+
+function showResult (result, humanChoice, computerChoice) {
+    removePreviousResult();
+
+    const body = document.querySelector("body");
+    const div = document.createElement("div");
+    const p = document.createElement("p");
+    div.setAttribute("id", "result");
+    div.appendChild(p);
+
+    switch(result) {
+        case("lose"):
+            p.textContent = `You lose! ${computerChoice} beats ${humanChoice}`;
+            break;
+        case("win"):
+            p.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
+            break;
+        case("tie"):
+            p.textContent = "It's a tie!";
+            break;
+    }
+
+    body.appendChild(div);
+}
+
+function removePreviousResult() {
+    const previousResult = document.getElementById("result");
+    if (previousResult) previousResult.remove();
+    return;
 }
 
 const btn = document.querySelector("#container");
