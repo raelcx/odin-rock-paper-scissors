@@ -4,11 +4,11 @@ function getComputerChoice() {
 
     switch(generateRandomNumber) {
         case(1): computerChoice = "rock";
-        break
+        break;
         case(2): computerChoice = "paper";
-        break
+        break;
         case(3): computerChoice = "scissors";
-        break
+        break;
     }
 
     return computerChoice;
@@ -31,37 +31,63 @@ function getHumanChoice() {
 
 function playRound(humanChoice, computerChoice) {
     if (humanChoice == computerChoice) {
-        console.log("It's a tie!");
-        return "tie";
+        return showResult("tie", humanChoice, computerChoice);
     }
     
-    if (humanChoice == "rock" && computerChoice == "scissors"
-        || humanChoice == "paper" && computerChoice == "rock"
-        || humanChoice == "scissors" && computerChoice == "paper") {
-        console.log(`You win! ${humanChoice} beats ${computerChoice}`);
-        return "human";
-    } else {
-        console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
-        return "computer";
+    if ((humanChoice == "rock" && computerChoice == "scissors")
+        || (humanChoice == "paper" && computerChoice == "rock")
+        || (humanChoice == "scissors" && computerChoice == "paper")) {
+        return showResult("win", humanChoice, computerChoice);
+    } 
+    else {
+        return showResult("lose", humanChoice, computerChoice);
     }
 }
 
-function playGame() {
+function showResult (result, humanChoice, computerChoice) {
+    removePreviousResult();
 
-    let humanScore = 0;
-    let computerScore = 0;
+    const body = document.querySelector("body");
+    const div = document.createElement("div");
+    const p = document.createElement("p");
+    div.setAttribute("id", "result");
+    div.appendChild(p);
 
-    
-    for (i = 0; i < 5; i++) {
-        let result = playRound(getHumanChoice(), getComputerChoice());
-
-        if (result == "human") {
-            humanScore += 1;
-        } else if (result == "computer") {
-            computerScore += 1;
-        }
+    switch(result) {
+        case("lose"):
+            p.textContent = `You lose! ${computerChoice} beats ${humanChoice}`;
+            break;
+        case("win"):
+            p.textContent = `You win! ${humanChoice} beats ${computerChoice}`;
+            break;
+        case("tie"):
+            p.textContent = "It's a tie!";
+            break;
     }
+
+    body.appendChild(div);
 }
 
+function removePreviousResult() {
+    const previousResult = document.getElementById("result");
+    if (previousResult) previousResult.remove();
+    return;
+}
 
+const btn = document.querySelector("#container");
+btn.addEventListener("click", (e) => {
+    const humanChoice = e.target.id;
+
+    switch(humanChoice) {
+        case('rock'):
+            playRound('rock', getComputerChoice());
+            break;
+        case('paper'):
+            playRound('paper', getComputerChoice());
+            break;
+        case('scissors'):
+            playRound('scissors', getComputerChoice());
+            break;
+    }
+})
 
